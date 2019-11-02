@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BakingApp</string>
+    <string name="network_error">Could not connect to a network. Swipe down to try again!</string>
+    <string name="tab_ingredients">Ingredients</string>
+    <string name="tab_steps">Steps</string>
+    <string name="detail_error">Failed to get recipe</string>
+</resources>
