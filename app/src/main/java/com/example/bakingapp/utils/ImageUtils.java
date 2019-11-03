@@ -1,5 +1,6 @@
 package com.example.bakingapp.utils;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.widget.ImageView;
 
@@ -9,37 +10,26 @@ import com.example.bakingapp.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ImageUtils {
-    private static final Pattern mPattern = Pattern.compile("cheesecake|cake|brownie|pie",
-            Pattern.CASE_INSENSITIVE);
+    private static final String[] foodNames = {"cheesecake", "cake", "brownie", "pie"};
+    private static final int[] foodResources = {R.drawable.ic_cheesecake, R.drawable.ic_cake,
+            R.drawable.ic_brownie, R.drawable.ic_pie};
+    private static final Map<String, Integer> sFoodResourceMap = getFoodResourceMap();
 
-    private static final Map<String, Integer> sPlaceHolderMap = new HashMap<>();
-    static {
-        sPlaceHolderMap.put("cheesecake", R.drawable.ic_cheesecake);
-        sPlaceHolderMap.put("cake", R.drawable.ic_cake);
-        sPlaceHolderMap.put("brownie", R.drawable.ic_brownie);
-        sPlaceHolderMap.put("pie", R.drawable.ic_pie);
-    }
-
-    public static void setImage(ImageView imageView, CardView cardView, String path, String name) {
-        Random rnd = new Random();
-        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        cardView.setBackgroundColor(color);
-
-        if (path.isEmpty()) {
-            imageView.setImageResource(getPlaceholder(name));
-            return;
-        }
+    public static void setImage(ImageView imageView, String path, String name) {
+        path = path.isEmpty() ? "invalid_path" : path;
+        int defaultImage = getMatchingImage(name);
         Picasso.get()
                 .load(path)
-                .placeholder(getPlaceholder(name))
+                .error(defaultImage)
+                .placeholder(defaultImage)
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -52,9 +42,26 @@ public class ImageUtils {
                 });
     }
 
-    private static Integer getPlaceholder(String name) {
-        Matcher matcher = mPattern.matcher(name);
+    public static void setBackgroundRandomColor(Context context, CardView cardView) {
+        cardView.setBackgroundColor(getRandomColor());
+    }
+
+    private static Integer getMatchingImage(String name) {
+        Pattern pattern = Pattern.compile(String.join("|", foodNames), Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(name);
         String matchString = matcher.find() ? matcher.group(0) : "";
-        return sPlaceHolderMap.getOrDefault(matchString.toLowerCase(), R.drawable.ic_food);
+        return sFoodResourceMap.getOrDefault(matchString.toLowerCase(), R.drawable.ic_food);
+    }
+
+    private static int getRandomColor() {
+        Random rnd = new Random();
+        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
+    private static Map<String, Integer> getFoodResourceMap() {
+        return IntStream
+                .range(0, foodNames.length)
+                .boxed()
+                .collect(Collectors.toMap(i -> foodNames[i], i -> foodResources[i]));
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bakingapp.view.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,11 @@ import java.util.List;
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder> {
 
     private final RecipesAdapterOnClickHandler mClickHandler;
+    private final Context mContext;
     private List<Recipe> mRecipes;
 
-    public RecipesAdapter(RecipesAdapterOnClickHandler clickHandler) {
+    public RecipesAdapter(Context context, RecipesAdapterOnClickHandler clickHandler) {
+        mContext = context;
         mClickHandler = clickHandler;
     }
 
@@ -42,7 +45,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
     public void onBindViewHolder(@NonNull RecipesViewHolder holder, int position) {
         Recipe recipe = mRecipes.get(position);
         holder.mName.setText(recipe.getName());
-        ImageUtils.setImage(holder.mImage, holder.mCardView, recipe.getImage(), recipe.getName());
+        ImageUtils.setImage(holder.mImage, recipe.getImage(), recipe.getName());
+        ImageUtils.setBackgroundRandomColor(mContext, holder.mCardView);
 
     }
 

@@ -59,7 +59,7 @@ public class RecipesActivity extends AppCompatActivity {
     private void configureRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        mAdapter = new RecipesAdapter(this::onItemClicked);
+        mAdapter = new RecipesAdapter(this, this::onItemClicked);
         mRecyclerView.setAdapter(mAdapter);
     }
 }
