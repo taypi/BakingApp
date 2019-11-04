@@ -19,12 +19,14 @@
 
     <TextView
         android:id="@+id/tv_ingredient_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
+        app:layout_constrainedWidth="true"
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_ingredient_quantity"
-        tools:text="Sugar"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Sugar sdifj isjdafi iasdjf i aisdjf iasjdf iajsdf sdiajf isdfj iasjdf ijasdf ijdsfa ijaisdjf iajfd ijafd iajdf iajd fijadf sijiadf j"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

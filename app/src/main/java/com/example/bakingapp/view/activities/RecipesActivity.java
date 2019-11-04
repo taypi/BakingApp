@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import com.example.bakingapp.R;
 import com.example.bakingapp.model.Recipe;
+import com.example.bakingapp.utils.IntentUtils;
 import com.example.bakingapp.view.adapters.RecipesAdapter;
 import com.example.bakingapp.viewmodel.RecipesViewModel;
 
@@ -51,9 +52,7 @@ public class RecipesActivity extends AppCompatActivity {
     }
 
     private void onItemClicked(Recipe recipe) {
-        Intent intentToStartDetailActivity = new Intent(this, RecipeDetailsActivity.class);
-        intentToStartDetailActivity.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, recipe);
-        startActivity(intentToStartDetailActivity);
+        IntentUtils.startActivity(this, RecipeDetailsActivity.class, recipe);
     }
 
     private void configureRecyclerView() {

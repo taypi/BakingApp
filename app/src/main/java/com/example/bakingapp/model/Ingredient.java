@@ -14,7 +14,7 @@ public class Ingredient implements Parcelable {
     @SerializedName("measure")
     @Expose
     private String measure;
-    @SerializedName("name")
+    @SerializedName("ingredient")
     @Expose
     private String name;
 

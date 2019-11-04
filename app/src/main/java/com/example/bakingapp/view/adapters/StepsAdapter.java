@@ -51,7 +51,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
     }
 
     public interface StepsAdapterOnClickHandler {
-        void onClick(Step Step);
+        void onClick(int position);
     }
 
     class StepsViewHolder extends RecyclerView.ViewHolder {
@@ -61,7 +61,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
             super(view);
             mShortDescription = view.findViewById(R.id.tv_step_short_description);
 
-            view.setOnClickListener(v -> mClickHandler.onClick(mSteps.get(getAdapterPosition())));
+            view.setOnClickListener(v -> mClickHandler.onClick(getAdapterPosition()));
         }
     }
 }

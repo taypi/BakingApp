@@ -3,6 +3,7 @@ package com.example.bakingapp.view.adapters;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     public void onBindViewHolder(@NonNull IngredientsViewHolder holder, int position) {
         Ingredient item = mIngredients.get(position);
         holder.mName.setText(item.getName());
-        holder.mQuantity.setText(String.format(Locale.getDefault(),
-                "%f %s", item.getQuantity(), item.getMeasure()));
+        holder.mQuantity.setText(getFormattedString(item));
     }
 
     @Override
@@ -55,6 +55,18 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     public interface IngredientsAdapterOnClickHandler {
         void onClick(Ingredient ingredient);
+    }
+
+    @SuppressLint("DefaultLocale")
+    private String getFormattedString(Ingredient ingredient) {
+        String formattedString;
+        double quantity = ingredient.getQuantity();
+        if (quantity == (long) quantity) {
+            formattedString = String.format("%d %s", (long) quantity, ingredient.getMeasure());
+        } else {
+            formattedString = String.format("%.2f %s", quantity, ingredient.getMeasure());
+        }
+        return formattedString;
     }
 
     class IngredientsViewHolder extends RecyclerView.ViewHolder {

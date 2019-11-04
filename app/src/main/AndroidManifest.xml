@@ -27,6 +27,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activities.RecipesActivity" />
         </activity>
+        <activity
+            android:name=".view.activities.StepDetailsActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".view.activities.RecipesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activities.RecipeDetailsActivity" />
+        </activity>
     </application>
 
 </manifest>

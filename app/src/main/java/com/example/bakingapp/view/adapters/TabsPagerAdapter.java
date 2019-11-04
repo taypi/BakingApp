@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.bakingapp.R;
-import com.example.bakingapp.model.Recipe;
 import com.example.bakingapp.view.fragments.IngredientsFragment;
 import com.example.bakingapp.view.fragments.StepsFragment;
 
@@ -22,12 +21,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_ingredients, R.string.tab_steps};
     private final Context mContext;
-    private final Recipe mRecipe;
 
-    public TabsPagerAdapter(Context context, FragmentManager fm, Recipe recipe) {
+    public TabsPagerAdapter(Context context, FragmentManager fm) {
         super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
-        mRecipe = recipe;
     }
 
     @Override
