@@ -32,6 +32,13 @@ public class IntentUtils {
         context.startActivity(intentToStartActivity);
     }
 
+    public static <T> void startActivity(Context context, Class<T> tClass, Parcelable extra, int index) {
+        Intent intentToStartActivity = new Intent(context, tClass);
+        intentToStartActivity.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, extra);
+        intentToStartActivity.putExtra(Intent.EXTRA_INDEX, index);
+        context.startActivity(intentToStartActivity);
+    }
+
     private static void handleError(Activity activity, int errorMessageId) {
         startActivity(activity, RecipesActivity.class, null);
         String errorMessage = activity.getResources().getString(errorMessageId);

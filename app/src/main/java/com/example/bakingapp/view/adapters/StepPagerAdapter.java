@@ -20,7 +20,6 @@ public class StepPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int index) {
         // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
         return StepDetailsFragment.getInstance(index);
     }
 

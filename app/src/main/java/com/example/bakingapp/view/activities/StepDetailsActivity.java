@@ -26,14 +26,10 @@ public class StepDetailsActivity extends AppCompatActivity {
 
         int currentItem = IntentUtils.getIntExtra(this);
 
-        // Find the view pager that will allow the user to swipe between fragments
         ViewPager viewPager = findViewById(R.id.view_pager_steps);
-
-        // Create an adapter that knows which fragment should be shown on each page
         StepPagerAdapter adapter = new StepPagerAdapter(getSupportFragmentManager(),
                 mViewModel.getRecipe(this).getSteps().size());
 
-        // Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(IntentUtils.getIntExtra(this));
         viewPager.addOnPageChangeListener(mPageChangeListener);
@@ -59,6 +55,5 @@ public class StepDetailsActivity extends AppCompatActivity {
             setProgressBar(pos);
             mViewModel.setCurrentStep(pos);
         }
-
     };
 }

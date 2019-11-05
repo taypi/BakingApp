@@ -23,7 +23,6 @@ import java.util.Objects;
 public class StepsFragment extends Fragment {
 
     private Recipe mRecipe;
-    private ViewPager mViewPager;
     private StepsAdapter.StepsAdapterOnClickHandler mOnClickHandler;
 
     /**
@@ -38,13 +37,7 @@ public class StepsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_steps, container, false);
         mRecipe = (Recipe) IntentUtils.getParcelableExtra(Objects.requireNonNull(getActivity()), R.string.error_get_recipe);
-        RecyclerView recyclerView = (RecyclerView) view;
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        StepsAdapter adapter = new StepsAdapter(this::onItemClicked);
-        adapter.setSteps(mRecipe.getSteps());
-        recyclerView.setAdapter(adapter);
-
-        mViewPager = view.findViewById(R.id.view_pager_steps);
+        setRecyclerView(view);
         return view;
     }
 
@@ -56,10 +49,15 @@ public class StepsFragment extends Fragment {
         if (mOnClickHandler != null) {
             mOnClickHandler.onClick(index);
         } else {
-            Intent intentToStartActivity = new Intent(getContext(), StepDetailsActivity.class);
-            intentToStartActivity.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, mRecipe);
-            intentToStartActivity.putExtra(Intent.EXTRA_INDEX, index);
-            startActivity(intentToStartActivity);
+            IntentUtils.startActivity(getContext(), StepDetailsActivity.class, mRecipe, index);
         }
+    }
+
+    private void setRecyclerView(View view) {
+        RecyclerView recyclerView = (RecyclerView) view;
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        StepsAdapter adapter = new StepsAdapter(this::onItemClicked);
+        adapter.setSteps(mRecipe.getSteps());
+        recyclerView.setAdapter(adapter);
     }
 }
