@@ -3,6 +3,7 @@ package com.example.bakingapp.view.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import com.example.bakingapp.R;
 import com.example.bakingapp.model.Recipe;
 import com.example.bakingapp.utils.IntentUtils;
 import com.example.bakingapp.view.adapters.IngredientsAdapter;
+import com.example.bakingapp.view.adapters.StepsAdapter;
 
 import java.util.Objects;
 
@@ -21,8 +23,6 @@ import java.util.Objects;
  * A fragment representing a list of Ingredients.
  */
 public class IngredientsFragment extends Fragment {
-
-    private Recipe mRecipe;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -35,12 +35,21 @@ public class IngredientsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ingredients, container, false);
-        mRecipe = (Recipe) IntentUtils.getParcelableExtra(Objects.requireNonNull(getActivity()), R.string.error_get_recipe);
-        RecyclerView recyclerView = (RecyclerView) view;
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        IngredientsAdapter adapter = new IngredientsAdapter(ingredient -> {});
-        adapter.setIngredients(mRecipe.getIngredients());
-        recyclerView.setAdapter(adapter);
+        Recipe recipe = (Recipe) IntentUtils.getParcelableExtra(Objects.requireNonNull(getActivity()), R.string.error_get_recipe);
+        setRecyclerView(view, recipe);
         return view;
+    }
+
+    private void setRecyclerView(View view, Recipe recipe) {
+        RecyclerView recyclerView = (RecyclerView) view;
+        IngredientsAdapter adapter = new IngredientsAdapter(ingredient -> {});
+        DividerItemDecoration decoration = new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL);
+
+        adapter.setIngredients(recipe.getIngredients());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.addItemDecoration(decoration);
+        recyclerView.setAdapter(adapter);
     }
 }

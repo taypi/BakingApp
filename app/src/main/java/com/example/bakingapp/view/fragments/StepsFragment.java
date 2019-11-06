@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -55,9 +56,14 @@ public class StepsFragment extends Fragment {
 
     private void setRecyclerView(View view) {
         RecyclerView recyclerView = (RecyclerView) view;
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         StepsAdapter adapter = new StepsAdapter(this::onItemClicked);
+        DividerItemDecoration decoration = new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL);
+
         adapter.setSteps(mRecipe.getSteps());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(adapter);
     }
 }
