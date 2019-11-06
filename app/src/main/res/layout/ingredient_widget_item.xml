@@ -9,22 +9,20 @@
         android:id="@+id/tv_ingredient_widget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-smallcaps"
         android:padding="10dp"
         android:paddingEnd="20dp"
         android:paddingStart="20dp"
         android:textSize="15sp"
-        tools:text="Salt" />
+        android:textStyle="bold"
+        tools:text="Cuscuz" />
 
     <TextView
         android:id="@+id/tv_quantity_widget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="serif-monospace"
         android:paddingEnd="20dp"
         android:paddingStart="20dp"
-        android:textStyle="bold"
-        tools:text="1.5 x TSP"
+        tools:text="1.5 TSP"
         android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

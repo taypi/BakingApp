@@ -60,8 +60,6 @@ public class RecipesActivity extends AppCompatActivity {
 
     private void onItemClicked(Recipe recipe) {
         IntentUtils.startActivity(this, RecipeDetailsActivity.class, recipe);
-        updateSharedPreference(recipe);
-        sendBroadcastToWidget();
     }
 
     private void configureRecyclerView() {
@@ -69,27 +67,5 @@ public class RecipesActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mAdapter = new RecipesAdapter(this, this::onItemClicked);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    private void sendBroadcastToWidget() {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, RecipeWidgetProvider.class));
-
-        Intent updateAppWidgetIntent = new Intent();
-        updateAppWidgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        updateAppWidgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-        sendBroadcast(updateAppWidgetIntent);
-    }
-
-    private void updateSharedPreference(Recipe recipe) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        String ingredients = JsonUtils.toJson(recipe.getIngredients());
-
-        editor.putString(RecipeWidgetProvider.RECIPE_INGREDIENTS_KEY, ingredients);
-        editor.putString(RecipeWidgetProvider.RECIPE_NAME_KEY, recipe.getName());
-
-        editor.apply();
     }
 }

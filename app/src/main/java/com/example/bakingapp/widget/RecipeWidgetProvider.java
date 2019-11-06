@@ -27,14 +27,14 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_widget);
 
         views.setTextViewText(R.id.tv_recipe_name_widget, getRecipeName(context));
-//
-//        Intent intent = new Intent(context, IngredientsRemoteViewsService.class);
-//        views.setRemoteAdapter(R.id.lv_ingredients_widget, intent);
-//        views.setEmptyView(R.id.lv_ingredients_widget, R.id.empty_view_widget);
 
-        Intent appIntent = new Intent(context, RecipesActivity.class);
-        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.btn_choose, appPendingIntent);
+        Intent intent = new Intent(context, IngredientsRemoteViewsService.class);
+        views.setRemoteAdapter(R.id.lv_ingredients_widget, intent);
+        views.setEmptyView(R.id.lv_ingredients_widget, R.id.empty_view_widget);
+
+//        Intent appIntent = new Intent(context, RecipesActivity.class);
+//        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        views.setOnClickPendingIntent(R.id.btn_choose, appPendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
@@ -70,16 +70,8 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     }
 
     private static String getRecipeName(Context context) {
-        return getFromSharedPreference(context, RECIPE_NAME_KEY,  "No name");
-    }
-
-    private static String getIngredients(Context context) {
-        return getFromSharedPreference(context, RECIPE_INGREDIENTS_KEY, "");
-    }
-
-    private static String getFromSharedPreference(Context context, String key, String defaultValue) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString(key,  defaultValue);
+        return sharedPreferences.getString(RECIPE_NAME_KEY,  context.getString(R.string.no_name));
     }
 }
 

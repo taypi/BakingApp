@@ -44,16 +44,18 @@ public class IngredientsRemoteViewsFactory implements RemoteViewsService.RemoteV
 
     @Override
     public RemoteViews getViewAt(int position) {
+        Ingredient ingredient;
         if (mIngredients == null || mIngredients.size() == 0) {
-            return null;
+            ingredient = new Ingredient();
+        } else {
+            ingredient = mIngredients.get(position);
         }
 
-        Ingredient ingredient = mIngredients.get(position);
         double quantity = ingredient.getQuantity();
         String measure = ingredient.getMeasure();
         String ingredientName = ingredient.getName();
 
-        RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.recipe_widget);
+        RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.ingredient_widget_item);
 
         views.setTextViewText(R.id.tv_ingredient_widget, ingredientName);
         views.setTextViewText(R.id.tv_quantity_widget, mContext.getResources()

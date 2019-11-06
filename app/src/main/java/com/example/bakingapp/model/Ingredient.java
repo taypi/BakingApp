@@ -42,6 +42,12 @@ public class Ingredient implements Parcelable {
         this.name = name;
     }
 
+    public Ingredient() {
+        name = "";
+        measure = "";
+        quantity = 0;
+    }
+
     protected Ingredient(Parcel in) {
         quantity = in.readDouble();
         measure = in.readString();
