@@ -32,9 +32,9 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         views.setRemoteAdapter(R.id.lv_ingredients_widget, intent);
         views.setEmptyView(R.id.lv_ingredients_widget, R.id.empty_view_widget);
 
-//        Intent appIntent = new Intent(context, RecipesActivity.class);
-//        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        views.setOnClickPendingIntent(R.id.btn_choose, appPendingIntent);
+        Intent appIntent = new Intent(context, RecipesActivity.class);
+        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(R.id.ll_widget, appPendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
