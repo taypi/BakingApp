@@ -42,20 +42,11 @@ public class ImageUtils {
                 });
     }
 
-    public static void setBackgroundRandomColor(Context context, CardView cardView) {
-        cardView.setBackgroundColor(getRandomColor());
-    }
-
     private static Integer getMatchingImage(String name) {
         Pattern pattern = Pattern.compile(String.join("|", foodNames), Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(name);
         String matchString = matcher.find() ? matcher.group(0) : "";
         return sFoodResourceMap.getOrDefault(matchString.toLowerCase(), R.drawable.ic_food);
-    }
-
-    private static int getRandomColor() {
-        Random rnd = new Random();
-        return Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
     }
 
     private static Map<String, Integer> getFoodResourceMap() {

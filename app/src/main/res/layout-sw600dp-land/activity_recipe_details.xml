@@ -8,9 +8,10 @@
         android:id="@+id/tv_ingredients_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
         android:text="@string/tab_ingredients"
         android:textAlignment="center"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorLight"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical"/>
@@ -30,9 +31,10 @@
         android:id="@+id/tv_steps_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
         android:text="@string/tab_steps"
         android:textAlignment="center"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorLight"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical"/>

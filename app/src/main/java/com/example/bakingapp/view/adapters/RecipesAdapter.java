@@ -46,8 +46,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         Recipe recipe = mRecipes.get(position);
         holder.mName.setText(recipe.getName());
         ImageUtils.setImage(holder.mImage, recipe.getImage(), recipe.getName());
-        ImageUtils.setBackgroundRandomColor(mContext, holder.mCardView);
-
+        holder.mCardView.setCardBackgroundColor(mContext.getColor(R.color.colorLight));
     }
 
     @Override
