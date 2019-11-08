@@ -82,9 +82,20 @@ public class StepDetailsFragment extends Fragment {
 
     @Override
     public void onPause() {
-        saveCurrentState();
-        releasePlayer();
         super.onPause();
+        if (Util.SDK_INT <= 23) {
+            saveCurrentState();
+            releasePlayer();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (Util.SDK_INT > 23) {
+            saveCurrentState();
+            releasePlayer();
+        }
     }
 
     @Override
