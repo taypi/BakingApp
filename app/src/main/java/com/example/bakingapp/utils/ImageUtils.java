@@ -19,8 +19,11 @@ public class ImageUtils {
     private static final Map<String, Integer> sFoodResourceMap = getFoodResourceMap();
 
     public static void setImage(ImageView imageView, String path, String name) {
+        setImage(imageView, path, getMatchingImage(name));
+    }
+
+    public static void setImage(ImageView imageView, String path, int defaultImage) {
         path = path.isEmpty() ? "invalid_path" : path;
-        int defaultImage = getMatchingImage(name);
         Picasso.get()
                 .load(path)
                 .error(defaultImage)

@@ -49,7 +49,11 @@ public class Step implements Parcelable {
     }
 
     public String getVideoURL() {
-        return videoURL;
+        if (videoURL.isEmpty() && thumbnailURL.endsWith(".mp4")) {
+            return thumbnailURL;
+        } else {
+            return videoURL;
+        }
     }
 
     public void setVideoURL(String videoURL) {

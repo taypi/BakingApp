@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.bakingapp.R;
 import com.example.bakingapp.model.Step;
+import com.example.bakingapp.utils.ImageUtils;
 import com.example.bakingapp.viewmodel.StepDetailsViewModel;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -36,7 +38,7 @@ public class StepDetailsFragment extends Fragment {
     private StepDetailsViewModel mViewModel;
     private SimpleExoPlayer mPlayer;
     private PlayerView mPlayerView;
-    private TextView mVideoNotAvailable;
+    private ImageView mVideoNotAvailable;
     private TextView mDescription;
     private long mPlaybackPosition;
     private boolean mPlayWhenReady;
@@ -65,7 +67,7 @@ public class StepDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_step_details, container, false);
 
         mPlayerView = view.findViewById(R.id.player);
-        mVideoNotAvailable = view.findViewById(R.id.tv_video_not_available);
+        mVideoNotAvailable = view.findViewById(R.id.iv_video_not_available);
         mDescription = view.findViewById(R.id.tv_description);
 
         setInitialValues(savedInstanceState);
@@ -74,28 +76,25 @@ public class StepDetailsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Since the app min sdk version is 27, we only need to initialize the player in the onStart
+     * callback. For more info, check: https://codelabs.developers.google.com/codelabs/exoplayer-intro/#2
+     */
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         initializePlayer();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (Util.SDK_INT <= 23) {
-            saveCurrentState();
-            releasePlayer();
-        }
-    }
-
+    /**
+     * Since the app min sdk version is 27, we only need to release the player in the onStop
+     * callback. For more info, check: https://codelabs.developers.google.com/codelabs/exoplayer-intro/#2
+     */
     @Override
     public void onStop() {
+        saveCurrentState();
+        releasePlayer();
         super.onStop();
-        if (Util.SDK_INT > 23) {
-            saveCurrentState();
-            releasePlayer();
-        }
     }
 
     @Override
@@ -161,6 +160,7 @@ public class StepDetailsFragment extends Fragment {
         }
 
         if (step.getVideoURL().isEmpty()) {
+            ImageUtils.setImage(mVideoNotAvailable, step.getThumbnailURL(), R.drawable.ic_cake_white);
             mPlayerView.setVisibility(GONE);
             mVideoNotAvailable.setVisibility(VISIBLE);
         } else {
