@@ -20,14 +20,14 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
-        android:id="@+id/tv_error_message_display"
+        android:id="@+id/tv_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_margin="@dimen/big_margin"
         android:text="@string/network_error"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/header_font_size"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
