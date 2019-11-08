@@ -1,8 +1,6 @@
 package com.example.bakingapp.viewmodel;
 
 import android.app.Application;
-import android.content.Context;
-import android.net.ConnectivityManager;
 import android.util.Log;
 
 import androidx.annotation.NonNull;

@@ -7,16 +7,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
 import com.example.bakingapp.R;
 import com.example.bakingapp.view.activities.RecipesActivity;
 
-/**
- * Implementation of App Widget functionality.
- */
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
     public static String RECIPE_NAME_KEY = "recipe_name";
@@ -41,7 +37,6 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -51,7 +46,6 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action != null && action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
-            // refresh all widgets
             AppWidgetManager mgr = AppWidgetManager.getInstance(context);
             ComponentName cn = new ComponentName(context, RecipeWidgetProvider.class);
             mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.lv_ingredients_widget);

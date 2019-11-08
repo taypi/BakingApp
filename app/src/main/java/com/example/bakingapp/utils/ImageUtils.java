@@ -1,17 +1,12 @@
 package com.example.bakingapp.utils;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.widget.ImageView;
-
-import androidx.cardview.widget.CardView;
 
 import com.example.bakingapp.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.Map;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;

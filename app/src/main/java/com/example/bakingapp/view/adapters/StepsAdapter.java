@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link com.example.bakingapp.model.Step} and makes a call to the
- * TODO: Replace the implementation with code for your data type.
  */
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHolder> {
 

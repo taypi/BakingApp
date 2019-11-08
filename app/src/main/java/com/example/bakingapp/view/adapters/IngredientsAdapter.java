@@ -13,11 +13,9 @@ import com.example.bakingapp.R;
 import com.example.bakingapp.model.Ingredient;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link com.example.bakingapp.model.Ingredient} and makes a call to the
- * TODO: Replace the implementation with code for your data type.
  */
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.IngredientsViewHolder> {
 
