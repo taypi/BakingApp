@@ -46,9 +46,4 @@ public class RecipesViewModel extends AndroidViewModel implements Repository.Req
     public void loadRecipes() {
         mRepository.requestRecipes(this);
     }
-
-    public boolean hasInternetConnection(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return Objects.requireNonNull(cm).getActiveNetwork() != null;
-    }
 }
