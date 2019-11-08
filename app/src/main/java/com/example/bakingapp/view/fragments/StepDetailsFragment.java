@@ -37,7 +37,6 @@ public class StepDetailsFragment extends Fragment {
     private SimpleExoPlayer mPlayer;
     private PlayerView mPlayerView;
     private TextView mVideoNotAvailable;
-//    private TextView mShortDescription;
     private TextView mDescription;
     private long mPlaybackPosition;
     private boolean mPlayWhenReady;
@@ -67,7 +66,6 @@ public class StepDetailsFragment extends Fragment {
 
         mPlayerView = view.findViewById(R.id.player);
         mVideoNotAvailable = view.findViewById(R.id.tv_video_not_available);
-//        mShortDescription = view.findViewById(R.id.tv_short_description);
         mDescription = view.findViewById(R.id.tv_description);
 
         setInitialValues(savedInstanceState);
@@ -148,7 +146,6 @@ public class StepDetailsFragment extends Fragment {
 
     private void setUi(Step step) {
         if (mDescription != null) {
-//            mShortDescription.setText(mViewModel.getShortDescription(mStepNumber));
             mDescription.setText(mViewModel.getDescription(mStepNumber));
         }
 
